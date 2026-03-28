@@ -1,8 +1,3 @@
-### ai-engineering-bootcamp
-
-A structured, hands-on AI engineering journey covering Python, NLP, Transformers, LLMs, and real-world AI applications using LangChain, Hugging Face, and modern AI tooling.
-### 🧠 AI Engineering Bootcamp (2026)
-
 This repository documents my hands-on journey through the  
 **“Complete AI Engineer Training: Python, NLP, Transformers, LLMs, LangChain, Hugging Face, APIs”** course.
 
