@@ -15,7 +15,7 @@ AI Engineering is a multidisciplinary field combining:
 - Large Language Models (LLMs)
 - System design & APIs
 
-This repository reflects a **learning-by-building approach**, where each concept is implemented through code, experiments, and mini-projects. :contentReference[oaicite:0]{index=0}
+This repository reflects a **learning-by-building approach**, where each concept is implemented through code, experiments, and mini-projects.
 
 ---
 
@@ -60,5 +60,3 @@ This repository reflects a **learning-by-building approach**, where each concept
 - Bridge the gap between theory and production-ready systems
 
 ---
-
-## 🏗️ Repository Structure
