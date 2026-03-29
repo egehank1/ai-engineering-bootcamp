@@ -1,0 +1,3 @@
+echo .ipynb_checkpoints/ > .gitignore
+echo anaconda_projects/ >> .gitignore
+echo *.db >> .gitignore
