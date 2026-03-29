@@ -1,4 +1,4 @@
-# 🧠 AI Engineering Bootcamp (2026)
+# 🧠 AI Engineering Bootcamp 
 
 This repository documents my hands-on journey through the  
 **“Complete AI Engineer Training: Python, NLP, Transformers, LLMs, LangChain, Hugging Face, APIs”** course.
