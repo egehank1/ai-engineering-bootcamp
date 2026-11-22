@@ -1,0 +1,56 @@
+name: Automated activity calendar
+on:
+  schedule:
+    - cron: '37 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: automated-activity-calendar
+  cancel-in-progress: false
+
+jobs:
+  calendar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Record scheduled calendar entries
+        shell: bash
+        run: |
+          set -euo pipefail
+          day=$(TZ=Europe/Berlin date +%F)
+          file=.github/calendar/latest.txt
+          if [[ -f "$file" ]] && grep -q "^$day " "$file"; then exit 0; fi
+          count=$(python - "$day" <<'PY'
+          import datetime, random, sys
+          day = datetime.date.fromisoformat(sys.argv[1])
+          start = datetime.date(2026, 11, 23)
+          if day < start:
+              print(0)
+              sys.exit()
+          while True:
+              rng = random.Random("bootcamp-calendar:" + start.isoformat())
+              length, active = rng.choice([(5, 3), (7, 5), (10, 9)])
+              offset = (day - start).days
+              if offset < length:
+                  selected = rng.sample(range(length), active)
+                  count = rng.choices([1, 2, 3, 5, 8], [48, 30, 15, 6, 1])[0]
+                  print(count if offset in selected else 0)
+                  break
+              start += datetime.timedelta(days=length)
+          PY
+          )
+          if (( count == 0 )); then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p "$(dirname "$file")"
+          for ((i=1; i<=count; i++)); do
+            echo "$day automated entry $i/$count" > "$file"
+            git add -- "$file"
+            git commit --author="Egehan Kilic <150257202+egehank1@users.noreply.github.com>" -m "Automated calendar entry $i/$count for $day"
+          done
+          git push origin HEAD:main
